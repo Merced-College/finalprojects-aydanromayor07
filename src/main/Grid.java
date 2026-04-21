@@ -12,6 +12,9 @@ package main;
 
 public class Grid {
     // Fields
+    public static final int EMPTY = 0;
+    public static final int BOMB = 9;
+
     private final int xSize;
     private final int ySize;
     private final Square[][] grid;
@@ -46,6 +49,18 @@ public class Grid {
         return xSize * ySize;
     }
 
+
+    /*
+     * Author: Aydan Romayor
+     * Function: printGrid()
+     * This method prints each individual square into a grid with labeled axis for easy readability.
+     * Time complexity: O(xSize * ySize)
+     */
+
+
+    /**
+     * Prints the grid.
+     */
     public void printGrid() {
         // Print x-axis labels and grid
         System.out.println("x");
@@ -87,5 +102,5 @@ public class Grid {
 
     public boolean isFlagged(int x, int y) { return grid[convertX(x)][y].isFlagged(); }
 
-    public boolean isBomb(int x, int y) { return grid[convertX(x)][x].isBomb(); }
+    public boolean isBomb(int x, int y) { return grid[convertX(x)][y].isBomb(); }
 }

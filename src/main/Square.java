@@ -34,7 +34,7 @@ public class Square {
 
     // Constructor(s)
     public Square() {
-        value = 0;
+        value = EMPTY;
         flagged = false;
         opened = false;
     }

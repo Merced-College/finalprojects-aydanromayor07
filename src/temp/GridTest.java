@@ -12,11 +12,6 @@ public class GridTest {
         Grid grid1 = new Grid(xSize, ySize);
         grid1.printGrid();
 
-        // Check dimensions
-        Assert.assertEquals(xSize, grid1.getXSize());
-        Assert.assertEquals(ySize, grid1.getYSize());
-        Assert.assertEquals(xSize * ySize, grid1.getTotalSquares());
-
         // Open bottom row of squares
         for(int i = 0; i < ySize; i++) {
             grid1.open(0, i);
@@ -49,5 +44,17 @@ public class GridTest {
 
         System.out.println();
         grid1.printGrid();
+    }
+
+    @Test
+    public void test() {
+        int xSize = 20;
+        int ySize = 30;
+        Grid grid1 = new Grid(xSize, ySize);
+        grid1.printGrid();
+
+        Assert.assertEquals(xSize, grid1.getXSize());
+        Assert.assertEquals(ySize, grid1.getYSize());
+        Assert.assertEquals(xSize * ySize, grid1.getTotalSquares());
     }
 }
