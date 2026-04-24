@@ -1,6 +1,6 @@
 /*
  * Author: Aydan Romayor
- * Class: Game.java
+ * Class: GameManager.java
  * 4/21/2026
  * 
  * Description:
@@ -12,9 +12,9 @@ package main;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public final class Game {
+public final class GameManager {
 
-    private Game() {} // Private constructor to prevent instantiation.
+    private GameManager() {} // Private constructor to prevent instantiation.
 
     /*
      * Author: Aydan Romayor
@@ -71,6 +71,7 @@ public final class Game {
         ArrayList<Integer[]> acceptableLocations = new ArrayList<>(); // Acceptable locations for the game to place bombs.
 
         // Generate a list of all acceptable locations for the bombs. This should be every square except the target coordinates and its neighbors.
+        // If the bomb count exceeds the area of the grid - 9 (the size of a 3x3 grid), no need to check neighbors.
         for (int i = 0; i < grid.getXSize(); i++) {
             for (int j = 0; j < grid.getYSize(); j++) {
                 int[] currentCoord = {i, j};
@@ -97,14 +98,14 @@ public final class Game {
      */
     /**
      * For every non-bomb Square, counts the number of bombs adjacent to the Square. It then sets the value of the Square to that number.
-     * @param grid Input grid. Use Game.placeBombs() to set the bombs.
+     * @param grid Input grid. Use GameManager.placeBombs() to set the bombs.
      */
     public static void bombNeighborCount(Grid grid) {
         for (int x = 0; x < grid.getXSize(); x++) {
             for (int y = 0; y < grid.getYSize(); y++) {
                 if (grid.isBomb(x, y)) continue;
 
-                int[][][] neighbors = Game.getNeighbors(x, y);
+                int[][][] neighbors = GameManager.getNeighbors(x, y);
                 grid.setValue(countBombs(neighbors, grid), x, y);
             }
         }
