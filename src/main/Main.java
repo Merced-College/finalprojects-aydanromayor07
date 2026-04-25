@@ -1,3 +1,13 @@
+/*
+ * Author: Aydan Romayor
+ * Class: Main.java
+ * 4/24/2026
+ * 
+ * Description:
+ * This is the Main java file for the Minesweeper game.
+ * To run the game, run this file.
+ */
+
 package main;
 
 import java.util.ArrayList;
