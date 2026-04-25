@@ -13,7 +13,7 @@ package main;
 public class Grid {
     // Fields
     public static final int EMPTY = 0;
-    public static final int BOMB = 9;
+    public static final int MINE = 9;
 
     private final int xSize;
     private final int ySize;
@@ -56,8 +56,6 @@ public class Grid {
      * This method prints each individual square into a grid with labeled axis for easy readability.
      * Time complexity: O(xSize * ySize)
      */
-
-
     /**
      * Prints the grid.
      */
@@ -83,6 +81,14 @@ public class Grid {
         System.out.println(" y");
     }
 
+    public void openAllMines() {
+        for (int x = 0; x < xSize; x++) {
+            for (int y = 0; y < ySize; y++) {
+                if (isMine(x, y)) open(x, y); 
+            }
+        }
+    }
+
     // Square Methods
     private int convertX(int x) {
         return xSize - x - 1; // Converts user inputted x-value into the correct corresponding value in the array
@@ -102,5 +108,5 @@ public class Grid {
 
     public boolean isFlagged(int x, int y) { return grid[convertX(x)][y].isFlagged(); }
 
-    public boolean isBomb(int x, int y) { return grid[convertX(x)][y].isBomb(); }
+    public boolean isMine(int x, int y) { return grid[convertX(x)][y].isMine(); }
 }

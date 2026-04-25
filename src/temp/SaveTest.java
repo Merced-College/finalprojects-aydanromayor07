@@ -16,7 +16,7 @@ public class SaveTest {
         System.out.println();
         Save.printSaveList(data);
 
-        Save.addEntry("Test4", "Hard", 294.3);
+        Save.addEntry("Test4", "Hard", String.valueOf(294.43));
 
         data = Save.readFile();
         System.out.println();

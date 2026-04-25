@@ -24,35 +24,35 @@ public class SquareTest {
         square1.open();
         Assert.assertEquals(true, square1.isOpen());
         Assert.assertEquals(false, square1.isFlagged());
-        Assert.assertEquals(false, square1.isBomb());
+        Assert.assertEquals(false, square1.isMine());
         Assert.assertEquals(0, square1.getValue());
         Assert.assertEquals("X", square1.toString());
 
         square1.setValue(5);
         Assert.assertEquals(true, square1.isOpen());
         Assert.assertEquals(false, square1.isFlagged());
-        Assert.assertEquals(false, square1.isBomb());
+        Assert.assertEquals(false, square1.isMine());
         Assert.assertEquals(5, square1.getValue());
         Assert.assertEquals("5", square1.toString());
 
-        int BOMB = 9;
-        square1.setValue(BOMB);
+        int MINE = 9;
+        square1.setValue(MINE);
         Assert.assertEquals(true, square1.isOpen());
         Assert.assertEquals(false, square1.isFlagged());
-        Assert.assertEquals(true, square1.isBomb());
+        Assert.assertEquals(true, square1.isMine());
         Assert.assertEquals("ó", square1.toString());
 
         square1.flag();
         Assert.assertEquals(true, square1.isOpen());
         Assert.assertEquals(true, square1.isFlagged());
-        Assert.assertEquals(true, square1.isBomb());
+        Assert.assertEquals(true, square1.isMine());
         Assert.assertEquals("P", square1.toString());
 
         square1.flag();
         square1.setValue(2);
         Assert.assertEquals(true, square1.isOpen());
         Assert.assertEquals(false, square1.isFlagged());
-        Assert.assertEquals(false, square1.isBomb());
+        Assert.assertEquals(false, square1.isMine());
         Assert.assertEquals("2", square1.toString());
     }
 

@@ -28,10 +28,10 @@ public class GridTest {
         System.out.println();
         grid1.printGrid();
 
-        // Set open squares to bombs
-        int BOMB = 9;
+        // Set open squares to mines
+        int MINE = 9;
         for (int i = 0; i < ySize; i++) {
-            grid1.setValue(BOMB, 0, i);
+            grid1.setValue(MINE, 0, i);
         }
 
         System.out.println();

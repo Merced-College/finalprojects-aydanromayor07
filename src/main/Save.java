@@ -29,7 +29,7 @@ public class Save {
 
         // Attempts to access the save file.
         try (Scanner scnr = new Scanner(saveFile)) {
-            System.out.println("Save file detected.\n");
+            System.out.println("Save file detected.");
             scnr.nextLine();
 
             int currentEntry = 0;
@@ -56,7 +56,7 @@ public class Save {
             scnr.close();
         }
         catch (FileNotFoundException e) { // If an error occurs, the program attempts to create a new save file.
-            System.out.println("File not found. Creating new save file: ");
+            System.out.println("\nFile not found. Creating new save file: ");
             createFile();
             readFile();
         }
@@ -75,7 +75,7 @@ public class Save {
                 System.out.println("File created: " + saveFile.getName());
                 System.out.println("Created at: " + path.toAbsolutePath());
             } else {
-                System.out.println("Save file detected.");
+                System.out.println("\nSave file detected.");
             }
         } catch (IOException e) {
             System.out.println("An error occured.");
@@ -105,27 +105,51 @@ public class Save {
         }
     }
 
-    public static void addEntry(String name, String mode, double time) {
+    // Writes directly to save file. Used to add new entries to the save file.
+    public static void addEntry(String name, String mode, String time) {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            System.out.println("\nSave file not detected. Creating new save file...\n");
+            createFile();
+            addEntry(name, mode, time);
+            return;
+        }
+
         try (FileWriter writer = new FileWriter(fileName, true) ){
             writer.flush();
             writer.write("\n" + name + "," + mode + "," + time);
             writer.close();
         } catch (IOException e) {
-            System.out.println("Failed to write entry to the save file.");
+            System.out.println("Failed to write entry to the save file. Creating new save file...");
+            createFile();
+            addEntry(name, mode, time);
         }
     }
 
-    // Takes a list of entries, parses the data, and prints it.
-    public static void printSaveList(ArrayList<String> data) {
+    // Converts a CSV string to an Entry object.
+    public static Entry convertToEntry(String csvLiteral) {
+        return new Entry(csvLiteral);
+    }
+
+    // Converts a list of CSV strings to a list of Entry objects.
+    public static ArrayList<Entry> convertToEntryList(ArrayList<String> data) {
+        ArrayList<Entry> entryList = new ArrayList<>();
+
         for (String line : data) {
-            String[] splitLine = line.split(",");
+            entryList.add(convertToEntry(line));
+        }
 
-            String entryNumber = splitLine[0];
-            String name = splitLine[1];
-            String mode = splitLine[2];
-            String time = splitLine[3];
+        return entryList;
+    }
 
-            System.out.println("Entry #" + entryNumber + ": Name: " + name + ", Mode: " + mode + ", Time: " + time + " seconds");
+    // Takes a list of entries, parses the data, and prints it.
+    public static void printSaveList(ArrayList<Entry> data) {
+        for (Entry entry : data) {
+            System.out.println("Entry #" + entry.getEntryNumber() + ": Name: " + entry.getUsername() + ", Mode: " + entry.getMode() + ", Time: " + entry.getTime() + " seconds");
+        }
+
+        if (data.isEmpty()) {
+            System.out.println("No entries found.");
         }
     }
 }
