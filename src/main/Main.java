@@ -105,8 +105,8 @@ public class Main {
                         break;
                     }
 
-                    System.out.printf("%d entries found.\n", entries.size());
-                    System.out.println("\nHow many entries to display? (Enter -1 to display all entries)");
+                    System.out.printf("\n%d entries found.\n", entries.size());
+                    System.out.println("How many entries to display? (Enter -1 to display all entries)");
                     int n = userInput(-1, entries.size());
 
                     System.out.println();
@@ -202,8 +202,16 @@ public class Main {
                     break;
                 }
                 case 5 -> {
+                    System.out.printf("\n%d entries found.\n", entries.size());
+                    System.out.println("How many entries to display? (Enter -1 to display all entries)");
+                    int n = userInput(-1, entries.size());
+
                     System.out.println();
-                    Save.printSaveList(entries);
+                    if (n == -1) { Save.printSaveList(entries);}
+                    else {
+                        ArrayList<Entry> sublist = new ArrayList<>(entries.subList(0, n));
+                        Save.printSaveList(sublist);
+                    }
                     break;
                 }
                 case 6 -> {
